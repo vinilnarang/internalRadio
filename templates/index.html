@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Radio </title>
+</head>
+<body>
+	<h2>Radio .... :-)</h2>	
+	<input id="radioSong">
+	<button id="submitSong">Submit Song</button>
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script>
+		$('#submitSong').on('click', function(){
+			$.ajax({
+				type: 'GET',
+				url: '/add?url='+$('#radioSong').val()
+			});
+		});
+	</script>
+</body>
+</html>
