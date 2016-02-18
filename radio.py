@@ -3,49 +3,51 @@ import subprocess
 from pprint import pformat
 import json
 
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return 'Welcome to internal radio 8finatics'
+    return '<h2>Welcome to 8finatics internal radio!</h2>' +\
+    	   '<a href="/addSong">Add Song</a>' +\
+    	   '<br><a href="/listSongs">List Songs</a>'
 
 @app.route('/addSong')
 def addSong():
-	return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/add')
 def add():
-	url = request.args.get('url')
-	fo = open("songs.json", "r")
-	obj = json.load(fo)
-	fo.close()
+    url = request.args.get('url')
+    fo = open("songs.json", "r")
+    obj = json.load(fo)
+    fo.close()
 
-	
-	obj.append(url)
-	fo = open("songs.json", "w")
-	json.dump(obj, fo)
-	fo.close()
+    obj.append(url)
+    fo = open("songs.json", "w")
+    json.dump(obj, fo)
+    fo.close()
 
-	return url
-
+    return url
 
 @app.route('/listSongs')
 def listSongs():
-	#x = subprocess.check_output(['wc','-l','songs.txt'])
-	#numLines = x.split(" ")[0]
-	#l = []
-	#with open("songs.txt","r") as f:
-	#	for line in f:
-	#		l.append(line[:-1])
-	#return pformat(l)
-	fo = open("songs.json", "r")
-	obj = json.load(fo)
-	fo.close()
-	return pformat(obj)
+    #x = subprocess.check_output(['wc','-l','songs.txt'])
+    #numLines = x.split(" ")[0]
+    #l = []
+    #with open("songs.txt","r") as f:
+    #    for line in f:
+    #        l.append(line[:-1])
+    #return pformat(l)
+    fo = open("songs.json", "r")
+    obj = json.load(fo)
+    fo.close()
+    return pformat(obj)
+
 
 if __name__ == '__main__':
-	obj=[]
-	fo = open("songs.json", "w")
-	json.dump(obj, fo)
-	fo.close()
-	app.run(debug=True, host='0.0.0.0')
+    obj=[]
+    fo = open("songs.json", "w")
+    json.dump(obj, fo)
+    fo.close()
+    app.run(debug=True, host='0.0.0.0')
