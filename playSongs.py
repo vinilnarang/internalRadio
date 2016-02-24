@@ -1,10 +1,11 @@
+#!/usr/bin/python
 import subprocess
 import time
 import json
 from pprint import pprint
 
 while True:
-    with open('songs.json', 'r') as data_file:    
+    with open('songs.json') as data_file:
         data = json.load(data_file)
         # data_file.close()
 

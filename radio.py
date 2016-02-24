@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import json
 import subprocess
 from pprint import pformat
@@ -43,6 +44,7 @@ def listSongs():
 
 if __name__ == '__main__':
     obj = []
-    with open(songs_file, "w") as fo:
-        json.dump(obj, fo)
+    if not raw_input("Clear data from old queue? (Y/n) - ").lower().startswith('n'):
+        with open(songs_file, "w") as fo:
+            json.dump(obj, fo)
     app.run(debug=True, host='0.0.0.0')
