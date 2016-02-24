@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Radio </title>
+    <title>Finomenal Radio!</title>
 </head>
 <body>
-	<h2>Radio .... :-)</h2>	
-	<input id="radioSong">
-	<button id="submitSong">Submit Song</button>
-	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script>
-		$('#submitSong').on('click', function(){
-			$.ajax({
-				type: 'GET',
-				url: '/add?url='+$('#radioSong').val()
-			});
-		});
-	</script>
+    <h2>Welcome to 8Finatics internal radio! (alpha)</h2>
+    <a href="/addSong">Add Song</a>
+    <br><a href="/listSongs">List Songs</a>
 </body>
 </html>
