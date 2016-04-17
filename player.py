@@ -1,8 +1,5 @@
 #!/usr/bin/python
 import json
-import subprocess
-from pytube import YouTube
-from pprint import pformat, pprint
 
 
 songs_file = "songs.json"
@@ -16,10 +13,12 @@ empty_db = {
 empty_record = {
     "url": "",
     "title": "",
-    "duration": 0,
     "author": "",
+    "duration": 0,
+    "video_id": "",
     "view_count": "",
     "thumbnail_url": "",
+    "local_filepath": "",
 }
 
 
