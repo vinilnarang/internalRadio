@@ -1,0 +1,12 @@
+{% extends base.html %}
+
+{% block content %}
+<h2>Queue History</h2>
+{% if songs_history %}
+<ol>
+    {% for song in songs_history %}
+    <li>{{ song.title }}</li>
+    {% endfor %}
+</ol>
+{% endif %}
+{% endblock %}

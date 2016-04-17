@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Finomenal Radio!{% endblock %}</title>
+</head>
+<body>
+    {% block menu %}
+    <div>
+        <a href="/">Home</a> |
+        <a href="/get_song_info">Add Song</a> |
+        <a href="/history">Queue History</a>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <h2>Welcome to Finomena internal radio! (alpha)</h2>
+    {% endblock %}
+</body>
+</html>
