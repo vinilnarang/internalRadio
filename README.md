@@ -1,8 +1,21 @@
 # Internal Radio :D
 
 ### Steps for setting up
-```
-# The app is a python 3 application, if you don't have pip3 then install following
-sudo apt-get install python3-pip
-# Now install dependencies with pip3
-pip3 install -r requirements.txt
+
+#### Install dependencies
+
+    # If you don't have pip installed, then run the following command
+    sudo apt-get install python-pip
+    # Now install dependencies with pip
+    pip install -r requirements.txt
+
+#### Host the Flask server
+
+    # Following helps receive requests from intranet connections
+    python server.py
+    # This will typically host the server at http://local_ip_address:5000
+
+#### Playing the songs being queued
+
+    # Following runs the vlc daemon (in a separate terminal)
+    python play_songs.py

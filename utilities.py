@@ -9,6 +9,15 @@ from pprint import pformat, pprint
 
 
 youtube_base_url = "https://www.youtube.com/watch?v="
+cur_dir = os.getcwd()
+
+
+def get_filter_index(quality=1, len_filter=1):
+    """
+    Returns the pytube filter index according to the given quality rating
+    (1 to 5, with 1 being lowest & 5 highest quality)
+    """
+    return int(round(quality/5.0 * len_filter)) - 1
 
 
 def is_valid_youtube_url(url=""):
@@ -21,7 +30,7 @@ def is_valid_youtube_url(url=""):
         return youtube_base_url + match_object.groupdict()['video_id']
 
 
-def get_song_info(given_url=""):
+def get_song_info(given_url="", local_dir=cur_dir, quality=1):
     """Returns song info for given YouTube url"""
     url = is_valid_youtube_url(given_url)
     yt = YouTube(url)
@@ -35,22 +44,25 @@ def get_song_info(given_url=""):
         song_info['duration'] = int(raw_info['args']['length_seconds'])
         song_info['view_count'] = int(raw_info['args']['view_count'])
         song_info['thumbnail_url'] = raw_info['args']['thumbnail_url']
+        filter_index = get_filter_index(quality, len(yt.filter()))
+        video = yt.filter()[filter_index]
+        local_file_name = "{0}.{1}".format(yt.filename, video.extension)
+        local_file_path = os.path.join(local_dir, local_file_name)
+        if os.path.exists(local_file_path):
+            song_info['local_file_path'] = local_file_path
         return song_info
     else:
         return None
 
 
-def download_song(given_url="", local_dir="", quality=1):
+def download_song(given_url="", local_dir=cur_dir, quality=1):
     """
     Downloads the video song for given YouTube URL
-    to the given local_dir (default os.getcwd())
-    of given quality (1 to 5, with 1 being lowest & 5 highest quality)
+    to the given local_dir (default os.getcwd()) of given quality
     """
     url = is_valid_youtube_url(given_url)
     yt = YouTube(url)
-    if not local_dir:
-        local_dir = os.getcwd()
-    filter_index = int(round(quality/5.0 * len(yt.filter()))) - 1
+    filter_index = get_filter_index(quality, len(yt.filter()))
     video = yt.filter()[filter_index]
     local_file_name = "{0}.{1}".format(yt.filename, video.extension)
     local_file_path = os.path.join(local_dir, local_file_name)

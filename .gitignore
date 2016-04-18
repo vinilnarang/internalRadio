@@ -12,7 +12,6 @@ env/
 build/
 develop-eggs/
 dist/
-downloads/
 eggs/
 .eggs/
 lib/
@@ -67,3 +66,6 @@ target/
 
 # pyenv
 .python-version
+
+# Songs backup files
+songs.json.bkp*

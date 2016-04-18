@@ -28,7 +28,9 @@ def get_song_info():
         return render_template('get_song_info.html')
     elif request.method == 'POST':
         url = request.form['url']
-        song = utilities.get_song_info(url)
+        song = utilities.get_song_info(
+            url, player.songs_directory, DL_QUALITY
+        )
         song_json = json.dumps(song)
         return render_template('add_song.html', song=song, song_json=song_json)
 
@@ -42,7 +44,7 @@ def add_song():
         )
         song['local_filepath'] = local_filepath
         player.queue_song(song)
-        time.sleep(sleep_time+0.5)
+        time.sleep(sleep_time+0.1)
         return redirect(url_for('index'))
 
 

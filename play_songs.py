@@ -8,7 +8,7 @@ import player
 import vlc
 
 
-sleep_time = 2 # in seconds
+sleep_time = 1 # in seconds
 
 
 if __name__ == '__main__':
