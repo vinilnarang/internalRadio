@@ -1,11 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Finomenal Radio!</title>
-</head>
-<body>
-    <h2>Welcome to 8Finatics internal radio! (alpha)</h2>
-    <a href="/add_song">Add Song</a>
-    <br><a href="/listSongs">List Songs</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>Now Playing</h3>
+    {% if now_playing %}
+    <table>
+        <tr>
+            <td>
+                <img src="{{ now_playing.thumbnail_url }}">
+            </td>
+            <td>
+                <a href="{{ now_playing.url }}">{{ now_playing.title }}</a>
+                <br>Author - {{ now_playing.author }}
+                <br>View count - {{ "{:,d}".format(now_playing.view_count) }}
+                <br>Duration - {{ now_playing.duration // 60 }} mins {{ now_playing.duration % 60 }} seconds
+                <br>Started at - {{ now_playing.start_time }}
+            </td>
+        </tr>
+    </table>
+    {% else %}
+    *Awkward silence* :(
+    {% endif %}
+
+    <h3>Queue</h3>
+    {% if songs_queued %}
+    <table>
+        {% for song in songs_queued %}
+        <tr>
+            <td>
+                <img src="{{ song.thumbnail_url }}">
+            </td>
+            <td>
+                <a href="{{ song.url }}">{{ song.title }}</a>
+                <br>Author - {{ song.author }}
+                <br>View count - {{ "{:,d}".format(song.view_count) }}
+                <br>Duration - {{ song.duration // 60 }} mins {{ song.duration % 60 }} seconds
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    No songs in queue!
+    {% endif %}
+{% endblock %}

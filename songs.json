@@ -1,1 +1,5 @@
-{}
+{
+    "queue": [], 
+    "now_playing": {}, 
+    "history": []
+}

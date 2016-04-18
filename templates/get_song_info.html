@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Finomenal Radio!</title>
-</head>
-<body>
-    <h2>Radio... :-)</h2>
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Get song info</h2>
     <form action="" method="post">
-        YouTube URL: <input id="url" type="text" name="url"/>
-        <button id="submitSong">Queue Song</button>
+        YouTube URL: <input id="url" type="text" name="url" autofocus/>
+        <button type="submit">Get info</button>
     </form>
-    <br>Please don't queue multiple songs in a go! Respect queues! Thanks.
-</body>
-</html>
+    <br>Respect queues! Don't add multiple songs in a go :)
+{% endblock %}

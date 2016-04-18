@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Finomenal Radio!</title>
-</head>
-<body>
-    <h2>Radio... :-)</h2>
-    <form action="" method="post">
-        YouTube URL: <input id="url" type="text" name="url"/>
-        <button id="submitSong">Queue Song</button>
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr>
+            <td>
+                <img src="{{ song.thumbnail_url }}">
+            </td>
+            <td>
+                <a href="{{ song.url }}">{{ song.title }}</a>
+                <br>Author - {{ song.author }}
+                <br>View count - {{ "{:,d}".format(song.view_count) }}
+                <br>Duration - {{ song.duration // 60 }} mins {{ song.duration % 60 }} seconds
+            </td>
+        </tr>
+    </table>
+    <form action="/add_song" method="post">
+        <input id="song_json" type="hidden" name="song_json" value="{{ song_json }}"/>
+        <br><button type="submit">Queue Song</button>
+        <br><b>Do NOT close this tab or hit refresh!</b>
+        <br>If song isn't already downloaded, this will trigger download.
+        <br>You will be redirected to homepage once the download is complete.
     </form>
-    <br>Please don't queue multiple songs in a go! Respect queues! Thanks.
-</body>
-</html>
+{% endblock %}

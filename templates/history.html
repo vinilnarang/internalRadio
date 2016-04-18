@@ -1,12 +1,24 @@
-{% extends base.html %}
+{% extends "base.html" %}
 
 {% block content %}
-<h2>Queue History</h2>
-{% if songs_history %}
-<ol>
-    {% for song in songs_history %}
-    <li>{{ song.title }}</li>
-    {% endfor %}
-</ol>
-{% endif %}
+    <h3>Queue history</h3>
+    {% if songs_history %}
+    <table>
+        {% for song in songs_history %}
+        <tr>
+            <td>
+                <img src="{{ song.thumbnail_url }}">
+            </td>
+            <td>
+                <a href="{{ song.url }}">{{ song.title }}</a>
+                <br>Author - {{ song.author }}
+                <br>View count - {{ "{:,d}".format(song.view_count) }}
+                <br>Duration - {{ song.duration // 60 }} mins {{ song.duration % 60 }} seconds
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    No history!
+    {% endif %}
 {% endblock %}
