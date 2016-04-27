@@ -14,6 +14,7 @@
                 <br>Author - {{ song.author }}
                 <br>View count - {{ "{:,d}".format(song.view_count) }}
                 <br>Duration - {{ song.duration // 60 }} mins {{ song.duration % 60 }} seconds
+                <br>Started at - {{ song.start_time }}
             </td>
         </tr>
         {% endfor %}
