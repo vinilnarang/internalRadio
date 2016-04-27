@@ -22,7 +22,7 @@ def get_filter_index(quality=1, len_filter=1):
 
 def is_valid_youtube_url(url=""):
     """Validates if the given URL/video_id is a valid YouTube video URL"""
-    regex = r'(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch)?(\?v=)(?P<video_id>\S+)'
+    regex = r'(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch)?(\?v=)(?P<video_id>[a-zA-Z0-9_-]+)'
     match_object = re.match(regex, url)
     if not match_object:
         return ""
@@ -40,7 +40,10 @@ def get_song_info(given_url="", local_dir=cur_dir, quality=1):
         song_info['url'] = url
         song_info['title'] = raw_info['args']['title']
         song_info['author'] = raw_info['args']['author']
-        song_info['video_id'] = raw_info['args']['vid']
+        try:
+            song_info['video_id'] = raw_info['args']['vid']
+        except KeyError:
+            song_info['video_id'] = url.replace(youtube_base_url, '')
         song_info['duration'] = int(raw_info['args']['length_seconds'])
         song_info['view_count'] = int(raw_info['args']['view_count'])
         song_info['thumbnail_url'] = raw_info['args']['thumbnail_url']
